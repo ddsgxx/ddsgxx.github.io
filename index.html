@@ -137,7 +137,37 @@
   .group-name { font-weight: 600; color: #1d1d1f; font-size: 13px; }
   .group-count { margin-left: 8px; font-size: 12px; color: #86868b; }
   tr.child-row td:first-child { padding-left: 34px; }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn:disabled:hover { background: #fff; }
+  .btn-primary:disabled:hover { background: #0071e3; }
+  .btn-sm { padding: 5px 12px; font-size: 13px; border-radius: 8px; }
+  /* 云端同步状态条：一切正常时自动隐藏，加载中／保存失败时出现 */
+  .sync-bar {
+    display: none; align-items: center; gap: 8px; margin-bottom: 14px;
+    padding: 9px 14px; border-radius: 10px; font-size: 13px;
+    background: #fff; border: 1px solid #e5e5ea; color: #86868b;
+  }
+  .sync-bar.show { display: flex; }
+  .sync-bar.loading, .sync-bar.saving { color: #0071e3; border-color: #cfe4fa; background: #f5faff; }
+  .sync-bar.ok { color: #2e7d32; border-color: #cfe8d0; background: #f4faf4; }
+  .sync-bar.warn { color: #b26a00; border-color: #ffe0b2; background: #fff8e1; }
+  .sync-bar.error { color: #d32f2f; border-color: #f5b5ae; background: #fdecea; }
+  .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex: none; }
+  .sync-text { flex: 1; line-height: 1.5; }
+  .sync-bar.loading .sync-dot, .sync-bar.saving .sync-dot { animation: syncPulse 1s ease-in-out infinite; }
+  @keyframes syncPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+  .state-cell { text-align: center; padding: 28px !important; color: #86868b; }
+  .state-cell .btn { margin-top: 12px; }
+  .token-note { font-size: 13px; color: #86868b; line-height: 1.75; margin-bottom: 14px; }
+  .token-note code { background: #f2f2f7; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+  .token-note b { color: #1d1d1f; }
+  .token-note a { color: #0071e3; text-decoration: none; }
+  .token-note a:hover { text-decoration: underline; }
+  .token-status { font-size: 13px; min-height: 18px; margin-top: 6px; line-height: 1.5; }
+  .token-status.err { color: #d32f2f; }
+  .token-status.ok { color: #2e7d32; }
   @media (max-width: 640px) {
+    .sync-bar { font-size: 12px; padding: 8px 12px; }
     .stats-row { gap: 8px; }
     .stat-card { min-width: 70px; padding: 10px 12px; }
     .stat-value { font-size: 22px; }
@@ -155,6 +185,16 @@
       <h1 class="title">秋招投递追踪</h1>
       <div class="subtitle" id="dateRange">金九银十 · 全力以赴</div>
     </div>
+    <button class="btn" id="tokenBtn" title="设置用于保存数据的 GitHub Token（只保存在本浏览器）">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 12h9M18 12v3M15 12v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      同步设置
+    </button>
+  </div>
+
+  <div class="sync-bar" id="syncBar">
+    <span class="sync-dot"></span>
+    <span class="sync-text" id="syncText"></span>
+    <button class="btn btn-sm" id="retryBtn" style="display:none;"></button>
   </div>
 
   <div class="stats-row">
@@ -304,20 +344,477 @@
       </form>
     </div>
   </div>
+
+  <div class="modal-overlay" id="tokenOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">配置 GitHub Token</h3>
+        <button class="icon-btn" id="tokenClose" style="opacity: 1;" title="关闭">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17.9542 4.77253C18.3056 4.42106 18.8761 4.42106 19.2276 4.77253C19.579 5.12401 19.579 5.69452 19.2276 6.04597L13.2735 12.0001L19.2276 17.9542C19.5791 18.3056 19.5791 18.8761 19.2276 19.2276C18.8761 19.5791 18.3056 19.5791 17.9542 19.2276L12.0001 13.2735L6.04595 19.2276C5.69451 19.5791 5.12399 19.579 4.77252 19.2276C4.42104 18.8761 4.42104 18.3056 4.77252 17.9542L10.7266 12.0001L4.77252 6.04597C4.42104 5.6945 4.42104 5.124 4.77252 4.77253C5.12399 4.42107 5.69448 4.42106 6.04595 4.77253L12.0001 10.7266L17.9542 4.77253Z" fill="currentColor"/></svg>
+        </button>
+      </div>
+
+      <p class="token-note">
+        读取数据不需要 token；<b>保存数据</b>需要你的 GitHub Token。
+        <b>它只保存在当前浏览器里</b>，不会上传到任何地方，也不会进仓库——
+        所以换设备/换浏览器时，在这台设备上再粘贴一次就行。
+      </p>
+      <p class="token-note">
+        建议用 <b>Fine-grained token</b>：Repository access 只勾选
+        <code>ddsgxx.github.io</code> 这一个仓库，Permissions 只给
+        <b>Contents → Read and write</b>，并设个过期时间。
+        <br>
+        <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">去 GitHub 创建一个 →</a>
+      </p>
+
+      <div class="form-group">
+        <label class="form-label">Token</label>
+        <input type="password" class="form-input" id="tokenInput" placeholder="github_pat_… 或 ghp_…" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="token-status" id="tokenStatus"></div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn" id="tokenClear" style="margin-right:auto;">清除已保存的 Token</button>
+        <button type="button" class="btn" id="tokenCancel">取消</button>
+        <button type="button" class="btn btn-primary" id="tokenSave">保存</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
 (function() {
-  const STORAGE_KEY = 'qiuzhao_tracker_v1';
-  let jobs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  /* ============================================================================
+     配置区：数据通过 GitHub 读写；网页源码里不放任何密钥
+     ----------------------------------------------------------------------------
+     🔑 关于 Token：仓库里【不保存】token。公开网页的源码谁都能看到，把 token 写进去
+        等于把仓库的写入权限公开出去（GitHub 的 secret scanning 也会直接拦下这种 push）。
+        现在的做法是：
+          · 第一次使用（以及换浏览器/换设备时）页面会弹窗让你粘贴一次 token
+          · token 只存在当前浏览器的 localStorage 里，不会上传、不会进仓库
+          · 想更换或清除，点右上角「同步设置」
+        建议用 Fine-grained token：
+          · 创建入口 https://github.com/settings/personal-access-tokens/new
+          · Repository access 只勾选 ddsgxx.github.io 这一个仓库
+          · Permissions 只给 Contents → Read and write，别的都不要给
+          · 设一个过期时间，到期后重新生成、再在页面里更新
+     ============================================================================ */
+  const GITHUB_OWNER  = 'ddsgxx';
+  const GITHUB_REPO   = 'ddsgxx.github.io';
+  const GITHUB_BRANCH = 'main';
+  const DATA_PATH     = 'data.json';
+  const READ_URL      = 'https://cdn.jsdelivr.net/gh/ddsgxx/ddsgxx.github.io@main/data.json';
+  const READ_FALLBACK = 'https://raw.githubusercontent.com/ddsgxx/ddsgxx.github.io/main/data.json';
+  // token 只存在浏览器本地（localStorage），源码和仓库里都没有 —— 说明见上面配置区
+  const TOKEN_KEY = 'qiuzhao_gh_token';
+  const TOKEN_URL = 'https://github.com/settings/personal-access-tokens/new';
+
+  const API_URL = 'https://api.github.com/repos/' + GITHUB_OWNER + '/' + GITHUB_REPO + '/contents/' + DATA_PATH;
+
+  // token 只保存在浏览器本地。localStorage 在无痕模式／被禁用时会抛错，
+  // 所以这里都兜住并返回状态，让调用方给出明确提示，而不是静默失败。
+  function getToken() {
+    try { return (localStorage.getItem(TOKEN_KEY) || '').trim(); } catch (err) { return ''; }
+  }
+  function storeToken(t) {
+    try { localStorage.setItem(TOKEN_KEY, t); return true; } catch (err) { return false; }
+  }
+  function forgetToken() {
+    try { localStorage.removeItem(TOKEN_KEY); } catch (err) { /* 忽略 */ }
+  }
+
+  /* ------------------------------ Token 弹窗 ------------------------------ */
+
+  function setTokenStatus(text, kind) {
+    const el = document.getElementById('tokenStatus');
+    el.textContent = text || '';
+    el.className = 'token-status' + (kind ? ' ' + kind : '');
+  }
+
+  function openTokenModal() {
+    document.getElementById('tokenInput').value = getToken();
+    setTokenStatus(getToken() ? '当前浏览器已保存 token，可以粘贴新的覆盖它。' : '', '');
+    document.getElementById('tokenOverlay').classList.add('active');
+    document.getElementById('tokenInput').focus();
+  }
+
+  function closeTokenModal() {
+    document.getElementById('tokenOverlay').classList.remove('active');
+    setTokenStatus('', '');
+  }
+
+  function submitToken() {
+    // 顺手清理常见的手工复制问题：多余空格、误带 "Bearer " 前缀
+    const t = document.getElementById('tokenInput').value.trim().replace(/^(Bearer|token)\s+/i, '');
+    if (!t) { setTokenStatus('请先粘贴 token。', 'err'); return; }
+    if (/\s/.test(t)) { setTokenStatus('token 里不应该有空格或换行，检查一下是不是复制多了。', 'err'); return; }
+    if (!storeToken(t)) {
+      setTokenStatus('这个浏览器存不下 token（可能是无痕模式，或禁用了本地存储）。', 'err');
+      return;
+    }
+    closeTokenModal();
+    // 刚才是因为缺 token 才没保存成功的，这里自动补一次
+    if (pendingSaveAfterToken) {
+      pendingSaveAfterToken = false;
+      save();
+    } else {
+      setSync('ok', 'Token 已保存到本浏览器。', false);
+    }
+  }
+
+  let jobs = [];
   let editingId = null;
   let grouped = false;                 // 是否按集团分组显示
   const collapsedGroups = new Set();   // 已收起的集团名称
 
+  let dataReady = false;               // 是否已成功读取云端数据（没读到之前禁止写入，避免把云端数据覆盖成空）
+  let dirty = false;                   // 有改动还没成功同步到 GitHub
+  let lastKnownSha = null;             // 最近一次成功保存后云端文件的 sha，用来发现「别的设备也改过」
+  let failedAction = null;             // 'load' | 'save' | 'token'，决定顶部「重试」按钮重试哪一步
+  let pendingSaveAfterToken = false;   // 因为没填 token 而没保存成功，填完自动补传一次
+  let saveQueue = Promise.resolve();   // 保存串行化：避免并发 PUT 互相顶掉
+  let okTimer = null;
+
   const statusOrder = ['投递', '笔试', '面试', 'OC', '泡池', '拒信'];
   const statusLabels = { '待投递': '待投递', '投递': '已投递', '笔试': '笔试中', '面试': '面试中', 'OC': '已拿offer', '拒信': '已挂', '泡池': '泡池子' };
 
-  function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(jobs)); }
+  /* ------------------------------ 顶部状态提示 ------------------------------ */
+
+  function setSync(state, text, canRetry) {
+    const bar = document.getElementById('syncBar');
+    const btn = document.getElementById('retryBtn');
+    if (okTimer) { clearTimeout(okTimer); okTimer = null; }
+
+    bar.className = 'sync-bar show ' + state;
+    document.getElementById('syncText').textContent = text;
+
+    if (canRetry) {
+      btn.style.display = '';
+      btn.textContent = failedAction === 'save' ? '重试上传'
+                      : failedAction === 'token' ? '填入 Token'
+                      : '重新加载';
+    } else {
+      btn.style.display = 'none';
+    }
+
+    // 「已同步」「已加载」这类正常状态看一眼就够了，几秒后自动收起
+    if (state === 'ok') {
+      okTimer = setTimeout(function() { bar.classList.remove('show'); }, 3000);
+    }
+  }
+
+  /* ------------------------------ 云端读取 ------------------------------ */
+
+  // 把任意来源的记录补齐成完整字段，避免缺字段导致渲染报错
+  function normalizeRecord(rec, i) {
+    const r = rec || {};
+    const status = statusLabels[r.status] !== undefined ? r.status : '投递';
+    return {
+      id: (typeof r.id === 'string' && r.id) ? r.id : 'rec_' + Date.now() + '_' + i,
+      company: String(r.company || ''),
+      job: String(r.job || ''),
+      status: status,
+      date: String(r.date || ''),
+      note: String(r.note || ''),
+      url: normalizeUrl(String(r.url || '')),
+      group: String(r.group || '').trim()
+    };
+  }
+
+  // 依次尝试若干地址，第一个能读出合法记录数组的就算成功
+  function fetchFirstAvailable(urls) {
+    return new Promise(function(resolve, reject) {
+      (function next(i, lastErr) {
+        if (i >= urls.length) { reject(lastErr || new Error('所有地址都不可用')); return; }
+        fetch(urls[i], { cache: 'no-store' })
+          .then(function(res) {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.text();
+          })
+          .then(function(text) {
+            let parsed;
+            try {
+              parsed = JSON.parse(text);
+            } catch (err) {
+              throw new Error('返回的内容不是合法 JSON');
+            }
+            if (!Array.isArray(parsed)) throw new Error('数据格式不是记录数组');
+            resolve({ text: text, data: parsed });
+          })
+          .catch(function(err) { next(i + 1, err); });
+      })(0, null);
+    });
+  }
+
+  // 走 GitHub API 读权威内容（同时拿到 sha，用于发现「别的设备也改过」）
+  function fetchAuthoritative() {
+    const headers = {
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28'
+    };
+    const useToken = !!getToken();     // 没填 token 也能读（仓库是公开的，只是额度低一些）
+    if (useToken) headers['Authorization'] = 'Bearer ' + getToken();
+
+    function request() {
+      return fetch(API_URL + '?ref=' + GITHUB_BRANCH, { headers: headers, cache: 'no-store' });
+    }
+
+    return request()
+      .then(function(res) {
+        // token 过期／权限不够时，公开仓库不带 token 也读得到，退回匿名再试一次，
+        // 免得因为 token 有问题连数据都看不了
+        if (useToken && (res.status === 401 || res.status === 403)) {
+          delete headers['Authorization'];
+          return request();
+        }
+        return res;
+      })
+      .then(function(res) {
+        if (res.status === 404) throw new Error('云端还没有 data.json');
+        if (!res.ok) return res.text().then(function(b) { throw new Error(describeApiError(res.status, b)); });
+        return res.json();
+      })
+      .then(function(meta) {
+        if (!meta || typeof meta.content !== 'string' || meta.encoding !== 'base64') {
+          throw new Error('GitHub API 没有返回文件内容');
+        }
+        const text = base64DecodeUtf8(meta.content.replace(/\s/g, ''));
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (err) {
+          throw new Error('云端的 data.json 不是合法 JSON');
+        }
+        if (!Array.isArray(data)) throw new Error('云端的 data.json 不是记录数组');
+        return { text: text, data: data, sha: meta.sha || null };
+      });
+  }
+
+  // 读取云端数据。
+  //
+  // 为什么要读两次：jsDelivr 对 /gh/ 的缓存是按「路径」缓存的，加 ?t=随机数 之类的参数
+  // 并不会绕过缓存（实测：全新的 query 依然命中同一条缓存、Age 持续递增），而且它默认缓存
+  // 12 小时（s-maxage=43200）。也就是说，在另一台设备保存之后，CDN 上可能还是几小时前的
+  // 旧版本 —— 如果直接拿来编辑并保存，就会把另一台设备的改动悄悄覆盖掉。
+  //
+  // 所以这里的做法是：
+  //   ① 先读 CDN（国内快）→ 立刻渲染，先让页面有内容可看
+  //   ② 同时读 GitHub API 的权威内容（带 token 时用 token）
+  //   ③ 两者不一致 → 说明 CDN 是旧缓存，自动换成 API 的最新内容并告知
+  //   ④ API 读不到（被墙／限流）→ 仍然显示 CDN 内容，但明确提示「可能不是最新」
+  // 编辑按钮在②结束前一直是禁用的，避免有人基于旧数据改动。
+  //
+  // 顺便：给 ddsgxx.github.io 装上 jsDelivr 的 GitHub App 之后，每次 push 都会自动清理
+  // CDN 缓存，那时 CDN 和 API 就会基本同步，这里的「已自动更新」提示也就很少出现了。
+  function loadFromCloud() {
+    failedAction = 'load';
+    dataReady = false;
+    document.getElementById('addBtn').disabled = true;
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('tableBody').innerHTML =
+      '<tr><td colspan="7" class="state-cell">正在读取云端数据…</td></tr>';
+    setSync('loading', '正在从云端读取 data.json…', false);
+
+    let cdnText = null, cdnData = null, cdnErr = null;
+    let apiText = null, apiData = null, apiSha = null, apiErr = null;
+    let done = 0;
+
+    // READ_FALLBACK 是 GitHub 原始地址，它对 query 是敏感的，加时间戳可以绕过它 5 分钟的缓存
+    const cdn = fetchFirstAvailable([READ_URL, READ_FALLBACK + '?t=' + Date.now()])
+      .then(function(r) {
+        cdnText = r.text;
+        cdnData = r.data;
+        // CDN 通常比 api.github.com 快得多，先渲染出来让页面有内容，
+        // 此时 dataReady 仍是 false，编辑按钮保持禁用，等校验结果
+        if (!dataReady) {
+          jobs = cdnData.map(normalizeRecord);
+          render();
+          setSync('loading', '已显示 CDN 缓存，正在校验是否为最新版本…', false);
+        }
+        done++;
+      }, function(e) { cdnErr = e; done++; });
+
+    const api = fetchAuthoritative()
+      .then(function(r) {
+        apiText = r.text; apiData = r.data; apiSha = r.sha;
+        done++;
+      }, function(e) { apiErr = e; done++; });
+
+    function settle() {
+      if (done < 2) return;
+
+      // API 权威内容优先；它读不到时才退回 CDN
+      let winner = null;
+      if (apiData) winner = { data: apiData, sha: apiSha, fromApi: true };
+      else if (cdnData) winner = { data: cdnData, sha: null, fromApi: false };
+
+      if (!winner) {
+        document.getElementById('tableBody').innerHTML = '';
+        document.getElementById('emptyState').style.display = 'none';
+        setSync('error',
+          '读取云端数据失败：' + ((apiErr && apiErr.message) || (cdnErr && cdnErr.message) || '未知错误') +
+          '。为了不把云端数据覆盖成空白，已暂停一切编辑；请检查网络后点「重新加载」。',
+          true);
+        return;
+      }
+
+      jobs = winner.data.map(normalizeRecord);
+      dataReady = true;
+      dirty = false;
+      lastKnownSha = winner.sha;
+      failedAction = null;
+      document.getElementById('addBtn').disabled = false;
+      render();
+
+      if (winner.fromApi) {
+        setSync('ok',
+          (cdnText !== null && cdnText !== apiText)
+            ? '已读取最新数据（CDN 上还是旧缓存，已自动换成 GitHub 直连的版本）'
+            : '云端数据已加载，共 ' + jobs.length + ' 条记录',
+          false);
+      } else {
+        setSync('warn',
+          'GitHub 直连不可用（' + apiErr.message + '），当前显示的是 CDN 缓存，可能不是最新。' +
+          '保存同样需要 GitHub 直连，如果保存失败请检查网络后重试。',
+          false);
+      }
+    }
+
+    Promise.resolve(cdn).then(function() { settle(); });
+    Promise.resolve(api).then(function() { settle(); });
+  }
+
+  /* ------------------------------ 云端保存 ------------------------------ */
+
+  function base64EncodeUtf8(str) {
+    const bytes = new TextEncoder().encode(str);
+    let binary = '';
+    const CHUNK = 0x8000;               // 分块，避免参数过多撑爆调用栈
+    for (let i = 0; i < bytes.length; i += CHUNK) {
+      binary += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK));
+    }
+    return btoa(binary);
+  }
+
+  // GitHub API 返回的文件内容是这个的逆运算
+  function base64DecodeUtf8(b64) {
+    const binary = atob(b64);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    return new TextDecoder('utf-8').decode(bytes);
+  }
+
+  // 把 GitHub API 的错误响应翻译成看得懂的话
+  function describeApiError(status, body) {
+    let detail = '';
+    try {
+      const parsed = JSON.parse(body);
+      if (parsed && parsed.message) detail = parsed.message;
+    } catch (err) { /* 忽略：非 JSON 错误体 */ }
+
+    let hint;
+    if (status === 401) hint = 'Token 无效、已过期或被撤销';
+    else if (status === 403) hint = 'Token 权限不足（需要 Contents 的写权限）或请求过于频繁';
+    else if (status === 404) hint = '找不到仓库或分支，也可能是 Token 没有这个仓库的权限';
+    else if (status === 409) hint = '云端文件版本冲突，刷新页面后重试';
+    else if (status === 422) hint = '提交内容被拒绝（可能是文件过大）';
+    else hint = 'GitHub 返回了意料之外的错误';
+    return hint + '（HTTP ' + status + '）' + (detail ? '：' + detail : '');
+  }
+
+  function doSave() {
+    if (!dataReady) {
+      dirty = true;
+      failedAction = 'load';
+      setSync('error', '云端数据还没有成功读取，这次的改动没有上传。请先点「重新加载」恢复云端数据。', true);
+      return Promise.resolve(false);
+    }
+    if (!getToken()) {
+      // 这个浏览器还没填 token：弹窗让他填一次，填完自动把这次改动传上去
+      dirty = true;
+      failedAction = 'token';
+      pendingSaveAfterToken = true;
+      setSync('warn',
+        '这个浏览器还没有填 GitHub Token，改动暂时只在本页面。点「填入 Token」填一次就能同步到云端。', true);
+      openTokenModal();
+      return Promise.resolve(false);
+    }
+
+    setSync('saving', '正在保存到云端…', false);
+
+    const headers = {
+      'Authorization': 'Bearer ' + getToken(),
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28'
+    };
+    const content = JSON.stringify(jobs, null, 2) + '\n';
+
+    // 1) 先取远端当前的 sha —— 更新已有文件时必须带上，否则 GitHub 会拒绝
+    return fetch(API_URL + '?ref=' + GITHUB_BRANCH + '&t=' + Date.now(), { headers: headers, cache: 'no-store' })
+      .then(function(res) {
+        if (res.ok) return res.json().then(function(meta) { return meta.sha || null; });
+        if (res.status === 404) return null;      // 云端还没有 data.json，直接新建
+        return res.text().then(function(body) { throw new Error(describeApiError(res.status, body)); });
+      })
+      .then(function(sha) {
+        // 除了本页面，别处也改过这个文件 → 先问一句，别把人家的记录直接盖掉
+        if (sha && lastKnownSha && sha !== lastKnownSha) {
+          const goOn = confirm(
+            '注意：云端 data.json 已经被改动过（可能是你在别的设备／浏览器上改的），' +
+            '继续保存会用当前这个页面的内容覆盖它，那边新加的记录就会丢。\n\n' +
+            '建议先点「取消」，刷新页面看到最新数据后再重新录入。\n\n' +
+            '确定要用当前页面的内容覆盖云端吗？'
+          );
+          if (!goOn) {
+            dirty = true;
+            failedAction = 'save';
+            setSync('error',
+              '已取消上传：云端有更新的版本，当前页面的改动还没同步。' +
+              '刷新页面可以看云端最新数据（注意：刷新会丢掉这次还没上传的改动）。', false);
+            return false;
+          }
+        }
+
+        const payload = {
+          message: 'chore: 更新秋招投递数据',
+          content: base64EncodeUtf8(content),
+          branch: GITHUB_BRANCH
+        };
+        if (sha) payload.sha = sha;
+
+        return fetch(API_URL, {
+          method: 'PUT',
+          headers: Object.assign({ 'Content-Type': 'application/json' }, headers),
+          body: JSON.stringify(payload)
+        }).then(function(res) {
+          if (!res.ok) {
+            return res.text().then(function(body) { throw new Error(describeApiError(res.status, body)); });
+          }
+          return res.json().then(function(result) {
+            lastKnownSha = (result && result.content && result.content.sha) || sha;
+            dirty = false;
+            failedAction = null;
+            setSync('ok', '已保存并同步到云端', false);
+            return true;
+          });
+        });
+      })
+      .catch(function(err) {
+        // 网络断了、token 不对、被墙……统统在这里兜住，绝不静默失败
+        dirty = true;
+        failedAction = 'save';
+        setSync('error',
+          '保存失败：' + err.message +
+          '。改动只保留在当前页面（千万别关掉或刷新），检查网络后点「重试上传」。', true);
+        return false;
+      });
+  }
+
+  // 每次改动都排队上传，避免两次 PUT 同时跑导致 sha 冲突
+  function save() {
+    saveQueue = saveQueue.then(function() { return doSave(); });
+    return saveQueue;
+  }
 
   function escapeHtml(text) {
     const div = document.createElement('div');
@@ -575,9 +1072,9 @@
     } else {
       jobs.unshift({ id: Date.now().toString(), company: company, job: job, status: status, date: date, note: note, url: url, group: group });
     }
-    save();
     render();
     closeModal();
+    save();                              // 异步上传到 GitHub，失败时顶部会有提示
   });
 
   document.getElementById('tableBody').addEventListener('click', function(e) {
@@ -609,8 +1106,8 @@
     } else if (btn.classList.contains('delete-btn')) {
       if (confirm('确定删除这条记录吗？')) {
         jobs = jobs.filter(function(j) { return j.id !== id; });
-        save();
         render();
+        save();
       }
     }
   });
@@ -641,6 +1138,10 @@
     var file = this.files && this.files[0];
     this.value = '';
     if (!file) return;
+    if (!dataReady) {
+      alert('云端数据还没有成功读取，暂时不能导入（避免覆盖云端数据）。请先点页面顶部的「重新加载」。');
+      return;
+    }
     var reader = new FileReader();
     reader.onload = function(e) {
       var imported;
@@ -675,12 +1176,14 @@
       }
       var msg = '将导入 ' + cleaned.length + ' 条记录';
       if (jobs.length > 0) msg += '，会覆盖当前已有的 ' + jobs.length + ' 条';
-      msg += '，确定继续吗？';
+      msg += '，并同步覆盖云端的 data.json，确定继续吗？';
       if (!confirm(msg)) return;
       jobs = cleaned;
-      save();
       render();
-      alert('导入成功，共 ' + cleaned.length + ' 条记录。');
+      save().then(function(ok) {
+        if (ok) alert('导入成功，共 ' + cleaned.length + ' 条记录，已同步到云端。');
+        else alert('已导入 ' + cleaned.length + ' 条记录到当前页面，但上传云端失败（原因见页面顶部提示）。请点「重试上传」再试一次。');
+      });
     };
     reader.onerror = function() { alert('读取文件失败。'); };
     reader.readAsText(file, 'utf-8');
@@ -697,17 +1200,39 @@
   document.getElementById('searchInput').addEventListener('input', render);
   document.getElementById('statusFilter').addEventListener('change', render);
 
-  // 初始化示例数据
-  if (jobs.length === 0) {
-    jobs = [
-      { id: '1', company: '京东方', job: '财务专员', status: '投递', date: '2026-09-03', note: '官网投递，内推码：BOE2026' },
-      { id: '2', company: '华为', job: '财经专员', status: '笔试', date: '2026-09-01', note: '9月5日线上面试' },
-      { id: '3', company: '字节跳动', job: '财务分析', status: '面试', date: '2026-08-28', note: '二面结束，等结果' },
-    ];
-    save();
-  }
+  // 顶部提示条上的「重试」：加载失败就重新读，保存失败就重新上传，缺 token 就打开设置
+  document.getElementById('retryBtn').addEventListener('click', function() {
+    if (failedAction === 'save') save();
+    else if (failedAction === 'token') openTokenModal();
+    else loadFromCloud();
+  });
 
-  render();
+  // 右上角「同步设置」：填写／更换／清除本浏览器保存的 token
+  document.getElementById('tokenBtn').addEventListener('click', openTokenModal);
+  document.getElementById('tokenClose').addEventListener('click', closeTokenModal);
+  document.getElementById('tokenCancel').addEventListener('click', closeTokenModal);
+  document.getElementById('tokenSave').addEventListener('click', submitToken);
+  document.getElementById('tokenOverlay').addEventListener('click', function(e) {
+    if (e.target === e.currentTarget) closeTokenModal();
+  });
+  document.getElementById('tokenInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { e.preventDefault(); submitToken(); }
+  });
+  document.getElementById('tokenClear').addEventListener('click', function() {
+    forgetToken();
+    document.getElementById('tokenInput').value = '';
+    setTokenStatus('已清除。这个浏览器不再能保存到云端，改动会只留在页面上。', 'err');
+  });
+
+  // 还有改动没上传成功就想关页面／刷新时拦一下，避免数据悄悄丢掉
+  window.addEventListener('beforeunload', function(e) {
+    if (dirty) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  // 启动：从云端读取 data.json。
+  // 注意：不再像以前那样在没有数据时写入示例记录 —— 读不到数据时宁可什么都不做，
+  // 也不能把云端的真实记录覆盖成示例数据。
+  loadFromCloud();
 })();
 </script>
 </body>
