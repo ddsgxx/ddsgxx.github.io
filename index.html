@@ -78,6 +78,8 @@
   .status-OC { background: #e8f5e9; color: #2e7d32; }
   .status-拒信 { background: #fdecea; color: #d32f2f; }
   .status-泡池 { background: #fff8e1; color: #f9a825; }
+  /* 暂不投递：搁置状态。用虚线和灰调跟「已投递」区分开，不加任何动效，视觉上安静下来 */
+  .status-暂不投递 { background: #eef0f4; color: #6b7280; border: 1px dashed #c7ccd6; }
   @keyframes todoPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,0,0.35); } 50% { box-shadow: 0 0 0 6px rgba(255,107,0,0); } }
   .status-待投递 { background: #ff6b00; color: #fff; animation: todoPulse 2s ease-out infinite; }
   .date-cell { font-size: 13px; color: #86868b; white-space: nowrap; }
@@ -126,6 +128,8 @@
   .progress-拒信 { width: 100%; background: #d32f2f; }
   .progress-泡池 { width: 85%; background: #f9a825; }
   .progress-待投递 { width: 8%; background: #ff6b00; }
+  /* 暂不投递不在投递流程里，这一列不画进度条，只显示一条短横线 */
+  .progress-skip { color: #b0b3ba; }
   .stage-dots { display: flex; gap: 4px; margin-top: 5px; }
   .stage-dot { width: 6px; height: 6px; border-radius: 50%; background: #e5e5ea; }
   .stage-dot.active { background: #0071e3; }
@@ -202,6 +206,10 @@
       <div class="stat-value" id="stat待投递" style="color:#ff6b00;">0</div>
       <div class="stat-label">待投递</div>
     </div>
+    <div class="stat-card" style="background:#f4f5f7;border-color:#d8dce3;">
+      <div class="stat-value" id="stat暂不投递" style="color:#6b7280;">0</div>
+      <div class="stat-label">暂不投递</div>
+    </div>
     <div class="stat-card">
       <div class="stat-value" id="statTotal">0</div>
       <div class="stat-label">总投递</div>
@@ -232,6 +240,7 @@
     <select class="filter-select" id="statusFilter">
       <option value="">全部状态</option>
       <option value="待投递">待投递</option>
+      <option value="暂不投递">暂不投递</option>
       <option value="投递">已投递</option>
       <option value="笔试">笔试中</option>
       <option value="面试">面试中</option>
@@ -311,6 +320,7 @@
             <label class="form-label">当前状态 *</label>
             <select class="form-select" id="statusInput" required>
               <option value="待投递">待投递</option>
+              <option value="暂不投递">暂不投递</option>
               <option value="投递">已投递</option>
               <option value="笔试">笔试中</option>
               <option value="面试">面试中</option>
@@ -476,7 +486,7 @@
   let okTimer = null;
 
   const statusOrder = ['投递', '笔试', '面试', 'OC', '泡池', '拒信'];
-  const statusLabels = { '待投递': '待投递', '投递': '已投递', '笔试': '笔试中', '面试': '面试中', 'OC': '已拿offer', '拒信': '已挂', '泡池': '泡池子' };
+  const statusLabels = { '待投递': '待投递', '暂不投递': '暂不投递', '投递': '已投递', '笔试': '笔试中', '面试': '面试中', 'OC': '已拿offer', '拒信': '已挂', '泡池': '泡池子' };
 
   /* ------------------------------ 顶部状态提示 ------------------------------ */
 
@@ -835,8 +845,8 @@
     return url;
   }
 
-  // 排序用的状态先后：待投递最前，拒信最后
-  const sortStatusOrder = ['待投递', '投递', '笔试', '面试', '泡池', 'OC', '拒信'];
+  // 排序用的状态先后：待投递最前，拒信最后；「暂不投递」跟待投递挨着，都是还没投出去的状态
+  const sortStatusOrder = ['待投递', '暂不投递', '投递', '笔试', '面试', '泡池', 'OC', '拒信'];
 
   // 按当前选择排序（不改动原数组，避免影响保存的顺序）
   function sortList(list) {
@@ -965,10 +975,12 @@
       return matchSearch && matchFilter;
     });
 
-    const counts = { '待投递': 0, '投递': 0, '笔试': 0, '面试': 0, 'OC': 0, '拒信': 0, '泡池': 0 };
+    const counts = { '待投递': 0, '暂不投递': 0, '投递': 0, '笔试': 0, '面试': 0, 'OC': 0, '拒信': 0, '泡池': 0 };
     jobs.forEach(j => { if (counts[j.status] !== undefined) counts[j.status]++; });
     document.getElementById('stat待投递').textContent = counts['待投递'];
-    document.getElementById('statTotal').textContent = jobs.length - counts['待投递'];
+    document.getElementById('stat暂不投递').textContent = counts['暂不投递'];
+    // 「总投递」是真正投出去的份数：待投递和暂不投递都还没投，都不算
+    document.getElementById('statTotal').textContent = jobs.length - counts['待投递'] - counts['暂不投递'];
     document.getElementById('stat笔试').textContent = counts['笔试'];
     document.getElementById('stat面试').textContent = counts['面试'];
     document.getElementById('statOC').textContent = counts['OC'];
@@ -1007,7 +1019,9 @@
       const job = entry.job;
       const dateStr = job.date || '-';
       const noteStr = job.note || '-';
-      const stageIdx = job.status === '待投递' ? -1 : statusOrder.indexOf(job.status);
+      // 「暂不投递」不在投递流程里，不画进度条也不画小圆点，这一列只留一条短横线
+      const skipProgress = job.status === '暂不投递';
+      const stageIdx = (job.status === '待投递' || skipProgress) ? -1 : statusOrder.indexOf(job.status);
       const dots = [0,1,2,3,4].map(i => {
         let cls = 'stage-dot';
         if (i < stageIdx && job.status !== '拒信' && job.status !== '泡池') cls += ' done';
@@ -1024,7 +1038,9 @@
         '<td><div class="company-name">' + companyCell + '</div>' + groupTag + '</td>' +
         '<td><div class="job-title">' + escapeHtml(job.job) + '</div></td>' +
         '<td><span class="status-badge status-' + job.status + '">' + statusLabels[job.status] + '</span></td>' +
-        '<td><div class="progress-bar"><div class="progress-fill progress-' + job.status + '"></div></div><div class="stage-dots">' + dots + '</div></td>' +
+        '<td>' + (skipProgress
+          ? '<span class="progress-skip">—</span>'
+          : '<div class="progress-bar"><div class="progress-fill progress-' + job.status + '"></div></div><div class="stage-dots">' + dots + '</div>') + '</td>' +
         '<td class="date-cell">' + dateStr + '</td>' +
         '<td class="note-cell" title="' + escapeHtml(noteStr) + '">' + escapeHtml(noteStr) + '</td>' +
         '<td><div class="row-actions">' +
