@@ -7,7 +7,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1790129140219",
@@ -17,7 +18,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1790129130986",
@@ -27,7 +29,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1790129115746",
@@ -37,7 +40,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1790129094883",
@@ -47,7 +51,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1790129062845",
@@ -57,7 +62,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": "银行"
+    "group": "银行",
+    "todos": []
   },
   {
     "id": "1790129051755",
@@ -67,7 +73,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": "银行"
+    "group": "银行",
+    "todos": []
   },
   {
     "id": "1790129044236",
@@ -77,7 +84,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": "银行"
+    "group": "银行",
+    "todos": []
   },
   {
     "id": "1790129034003",
@@ -87,7 +95,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1790129026011",
@@ -97,7 +106,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "https://jqzp.fesco.com.cn/personalcenter",
-    "group": "银行"
+    "group": "银行",
+    "todos": []
   },
   {
     "id": "1790128996266",
@@ -107,7 +117,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": "银行"
+    "group": "银行",
+    "todos": []
   },
   {
     "id": "1790128982819",
@@ -117,7 +128,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1790128930274",
@@ -127,7 +139,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1790128915570",
@@ -137,7 +150,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1790128907066",
@@ -147,7 +161,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1790128892731",
@@ -157,7 +172,8 @@
     "date": "2026-09-23",
     "note": "",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1790067168610",
@@ -167,7 +183,8 @@
     "date": "2026-09-22",
     "note": "",
     "url": "https://jqzp.fesco.com.cn/personalcenter",
-    "group": "电子城高科技集团"
+    "group": "电子城高科技集团",
+    "todos": []
   },
   {
     "id": "1790067069638",
@@ -177,7 +194,8 @@
     "date": "2026-09-22",
     "note": "行业可以，公司规模太小",
     "url": "https://jqzp.fesco.com.cn/personalcenter",
-    "group": "电子量"
+    "group": "电子量",
+    "todos": []
   },
   {
     "id": "1790067006919",
@@ -187,7 +205,8 @@
     "date": "2026-09-22",
     "note": "公司太小",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1790065767826",
@@ -197,7 +216,8 @@
     "date": "2026-09-22",
     "note": "",
     "url": "https://jqzp.fesco.com.cn/personalcenter",
-    "group": "三元"
+    "group": "三元",
+    "todos": []
   },
   {
     "id": "1790056517077",
@@ -207,7 +227,8 @@
     "date": "2026-09-22",
     "note": "无投递岗位",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1789981078564",
@@ -217,7 +238,8 @@
     "date": "2026-09-21",
     "note": "",
     "url": "https://norincogroupzhaopin.zhiye.com/personal/collectRecord",
-    "group": "中国兵器工业集团"
+    "group": "中国兵器工业集团",
+    "todos": []
   },
   {
     "id": "1789981059343",
@@ -227,7 +249,8 @@
     "date": "2026-09-21",
     "note": "",
     "url": "https://norincogroupzhaopin.zhiye.com/personal/collectRecord",
-    "group": "中国兵器工业集团"
+    "group": "中国兵器工业集团",
+    "todos": []
   },
   {
     "id": "1789981036584",
@@ -237,7 +260,8 @@
     "date": "2026-09-21",
     "note": "",
     "url": "https://norincogroupzhaopin.zhiye.com/personal/collectRecord",
-    "group": "中国兵器工业集团"
+    "group": "中国兵器工业集团",
+    "todos": []
   },
   {
     "id": "1789630663058",
@@ -247,7 +271,8 @@
     "date": "2026-09-17",
     "note": "北京无财务岗，只有上海有",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1789627422158",
@@ -257,7 +282,8 @@
     "date": "2026-09-17",
     "note": "只有上海有财务职位",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1789627414618",
@@ -267,7 +293,8 @@
     "date": "2026-09-17",
     "note": "只有上海有财务岗",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1789626682100",
@@ -277,7 +304,8 @@
     "date": "2026-09-22",
     "note": "",
     "url": "https://talent.baidu.com/jobs/center",
-    "group": "百度"
+    "group": "百度",
+    "todos": []
   },
   {
     "id": "1789621181786",
@@ -287,7 +315,8 @@
     "date": "2026-09-21",
     "note": "",
     "url": "https://norincogroupzhaopin.zhiye.com/personal/collectRecord",
-    "group": "中国兵器工业集团"
+    "group": "中国兵器工业集团",
+    "todos": []
   },
   {
     "id": "1789620514009",
@@ -297,7 +326,8 @@
     "date": "2026-09-17",
     "note": "",
     "url": "https://q.yingjiesheng.com/pc/personal?tab=2",
-    "group": "中国移动"
+    "group": "中国移动",
+    "todos": []
   },
   {
     "id": "1789614505569",
@@ -307,7 +337,8 @@
     "date": "2026-09-20",
     "note": "",
     "url": "https://talent.lenovo.com.cn/account/apply",
-    "group": "联想"
+    "group": "联想",
+    "todos": []
   },
   {
     "id": "1789566135372",
@@ -317,7 +348,8 @@
     "date": "2026-09-16",
     "note": "",
     "url": "https://baicgroup.zhiye.com/personal/deliveryRecord",
-    "group": "北汽"
+    "group": "北汽",
+    "todos": []
   },
   {
     "id": "1789566116678",
@@ -327,7 +359,8 @@
     "date": "2026-09-16",
     "note": "",
     "url": "https://baicgroup.zhiye.com/personal/deliveryRecord",
-    "group": "北汽"
+    "group": "北汽",
+    "todos": []
   },
   {
     "id": "1789566097260",
@@ -337,7 +370,8 @@
     "date": "2026-09-16",
     "note": "",
     "url": "https://baicgroup.zhiye.com/personal/deliveryRecord",
-    "group": "北汽"
+    "group": "北汽",
+    "todos": []
   },
   {
     "id": "1789566075156",
@@ -347,7 +381,8 @@
     "date": "2026-09-16",
     "note": "",
     "url": "https://baicgroup.zhiye.com/personal/deliveryRecord",
-    "group": "北汽"
+    "group": "北汽",
+    "todos": []
   },
   {
     "id": "1789566054340",
@@ -357,7 +392,8 @@
     "date": "2026-09-16",
     "note": "",
     "url": "https://baicgroup.zhiye.com/personal/deliveryRecord",
-    "group": "北汽"
+    "group": "北汽",
+    "todos": []
   },
   {
     "id": "1789566027108",
@@ -367,7 +403,8 @@
     "date": "2026-09-16",
     "note": "",
     "url": "https://baicgroup.zhiye.com/personal/deliveryRecord",
-    "group": "北汽"
+    "group": "北汽",
+    "todos": []
   },
   {
     "id": "1789565987588",
@@ -377,7 +414,8 @@
     "date": "2026-09-16",
     "note": "",
     "url": "https://baicgroup.zhiye.com/personal/deliveryRecord",
-    "group": "北汽"
+    "group": "北汽",
+    "todos": []
   },
   {
     "id": "1789565942096",
@@ -387,7 +425,8 @@
     "date": "2026-09-16",
     "note": "",
     "url": "https://baicgroup.zhiye.com/personal/deliveryRecord",
-    "group": "北汽"
+    "group": "北汽",
+    "todos": []
   },
   {
     "id": "1789565917900",
@@ -397,7 +436,8 @@
     "date": "2026-09-16",
     "note": "",
     "url": "https://baicgroup.zhiye.com/personal/deliveryRecord",
-    "group": "北汽"
+    "group": "北汽",
+    "todos": []
   },
   {
     "id": "1789565851309",
@@ -407,7 +447,8 @@
     "date": "2026-09-16",
     "note": "",
     "url": "https://baicgroup.zhiye.com/personal/deliveryRecord",
-    "group": "北汽"
+    "group": "北汽",
+    "todos": []
   },
   {
     "id": "1789565828408",
@@ -417,7 +458,8 @@
     "date": "2026-09-16",
     "note": "",
     "url": "https://baicgroup.zhiye.com/personal/deliveryRecord",
-    "group": "北汽"
+    "group": "北汽",
+    "todos": []
   },
   {
     "id": "1789565786913",
@@ -427,7 +469,8 @@
     "date": "2026-09-16",
     "note": "",
     "url": "https://baicgroup.zhiye.com/personal/deliveryRecord",
-    "group": "北汽"
+    "group": "北汽",
+    "todos": []
   },
   {
     "id": "1789528617479",
@@ -437,7 +480,8 @@
     "date": "2026-09-16",
     "note": "？",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1789528559043",
@@ -447,7 +491,8 @@
     "date": "2026-09-18",
     "note": "",
     "url": "https://xiaoyuan.zhaopin.com/scrd/delivery/record",
-    "group": "联通"
+    "group": "联通",
+    "todos": []
   },
   {
     "id": "1789528487475",
@@ -457,7 +502,8 @@
     "date": "2026-09-16",
     "note": "无投递岗位",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1789528451160",
@@ -467,7 +513,8 @@
     "date": "2026-09-16",
     "note": "四大，需要英文简历",
     "url": "",
-    "group": "四大"
+    "group": "四大",
+    "todos": []
   },
   {
     "id": "1789528409899",
@@ -477,7 +524,8 @@
     "date": "2026-09-16",
     "note": "",
     "url": "https://career.honor.com/SU60eea919bef57c1023f6fe78/pb/account.html#/myDeliver",
-    "group": "荣耀"
+    "group": "荣耀",
+    "todos": []
   },
   {
     "id": "1789528379147",
@@ -487,7 +535,8 @@
     "date": "2026-09-16",
     "note": "大多工作地点在南方，且北京为市场管培生",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1789528372692",
@@ -497,7 +546,8 @@
     "date": "2026-09-16",
     "note": "只有管培生",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1789528088100",
@@ -507,7 +557,8 @@
     "date": "2026-09-16",
     "note": "在深圳",
     "url": "",
-    "group": ""
+    "group": "",
+    "todos": []
   },
   {
     "id": "1789527950020",
@@ -517,7 +568,8 @@
     "date": "2026-09-17",
     "note": "",
     "url": "https://xiaomi.jobs.f.mioffice.cn/campus/position/application?spread=J7NS6YR",
-    "group": "小米"
+    "group": "小米",
+    "todos": []
   },
   {
     "id": "1789377081396",
@@ -527,7 +579,8 @@
     "date": "2026-09-17",
     "note": "",
     "url": "https://xiaoyuan.zhaopin.com/job/CC000413680J40908286013?srccode=448002&openmp=0",
-    "group": "中国移动"
+    "group": "中国移动",
+    "todos": []
   },
   {
     "id": "1789279607565",
@@ -537,7 +590,8 @@
     "date": "2026-09-16",
     "note": "",
     "url": "https://career.naura.com/personal/deliveryRecord",
-    "group": "北方华创"
+    "group": "北方华创",
+    "todos": []
   },
   {
     "id": "1789279331054",
@@ -547,7 +601,8 @@
     "date": "2026-09-13",
     "note": "",
     "url": "https://xiaoyuan.zhaopin.com/scrd/delivery/record",
-    "group": "中国邮政"
+    "group": "中国邮政",
+    "todos": []
   },
   {
     "id": "1789273268933",
@@ -557,7 +612,8 @@
     "date": "2026-09-17",
     "note": "",
     "url": "https://sinochem.hotjob.cn/SU610b91ee0dcad4106ff11c21/pb/posDetail.html?postId=6aa352d442efacd5904b9b52&postType=campus",
-    "group": "中化"
+    "group": "中化",
+    "todos": []
   },
   {
     "id": "1789273226797",
@@ -567,7 +623,8 @@
     "date": "2026-09-14",
     "note": "",
     "url": "https://careers.midea.com/schoolOut/apply?type=1",
-    "group": "美的"
+    "group": "美的",
+    "todos": []
   },
   {
     "id": "1789273216446",
@@ -577,7 +634,15 @@
     "date": "2026-09-13",
     "note": "",
     "url": "https://ceri.zhiye.com/personal/deliveryRecord",
-    "group": "中冶京诚"
+    "group": "中冶京诚",
+    "todos": [
+      {
+        "id": "td_new_1790137791317_0",
+        "type": "AI面试",
+        "due": "2026-09-30",
+        "dueTime": "23:59"
+      }
+    ]
   },
   {
     "id": "1788940954829",
@@ -587,7 +652,8 @@
     "date": "2026-09-13",
     "note": "",
     "url": "https://jobs.bytedance.com/campus/position/application",
-    "group": "字节"
+    "group": "字节",
+    "todos": []
   },
   {
     "id": "1788940943661",
@@ -597,7 +663,8 @@
     "date": "2026-09-13",
     "note": "第二志愿筛选",
     "url": "https://zhaopin.meituan.com/web/personal-center/delivery-record",
-    "group": "美团"
+    "group": "美团",
+    "todos": []
   },
   {
     "id": "1788940934301",
@@ -607,7 +674,8 @@
     "date": "2026-09-13",
     "note": "",
     "url": "https://xiaoyuan.zhaopin.com/scrd/delivery/record",
-    "group": "中国邮政"
+    "group": "中国邮政",
+    "todos": []
   },
   {
     "id": "1788940914789",
@@ -617,7 +685,8 @@
     "date": "2026-09-13",
     "note": "",
     "url": "https://cgn.hotjob.cn/",
-    "group": "中广核"
+    "group": "中广核",
+    "todos": []
   },
   {
     "id": "1788940801021",
@@ -627,7 +696,8 @@
     "date": "2026-09-09",
     "note": "",
     "url": "https://app.mokahr.com/campus_apply/cyou-inc/42233?recommendCode=DSQvzV4u#/",
-    "group": "搜狐"
+    "group": "搜狐",
+    "todos": []
   },
   {
     "id": "1788932970465",
@@ -637,7 +707,8 @@
     "date": "2026-09-09",
     "note": "",
     "url": "https://chinalife.zhiye.com/personal/deliveryRecord",
-    "group": "中国人寿"
+    "group": "中国人寿",
+    "todos": []
   },
   {
     "id": "1788932950061",
@@ -647,7 +718,8 @@
     "date": "2026-09-09",
     "note": "",
     "url": "https://chinalife.zhiye.com/personal/deliveryRecord",
-    "group": "中国人寿"
+    "group": "中国人寿",
+    "todos": []
   },
   {
     "id": "1788932928974",
@@ -657,7 +729,8 @@
     "date": "2026-09-09",
     "note": "",
     "url": "https://chinalife.zhiye.com/personal/deliveryRecord",
-    "group": "中国人寿"
+    "group": "中国人寿",
+    "todos": []
   },
   {
     "id": "1788918089245",
@@ -667,7 +740,8 @@
     "date": "2026-09-08",
     "note": "",
     "url": "https://cxmt.zhiye.com/personal/deliveryRecord",
-    "group": "长鑫存储"
+    "group": "长鑫存储",
+    "todos": []
   },
   {
     "id": "1788918055798",
@@ -677,7 +751,8 @@
     "date": "2026-09-08",
     "note": "",
     "url": "https://cxmt.zhiye.com/personal/deliveryRecord",
-    "group": "长鑫存储"
+    "group": "长鑫存储",
+    "todos": []
   },
   {
     "id": "1788835211367",
@@ -687,7 +762,8 @@
     "date": "2026-09-08",
     "note": "",
     "url": "https://job.citic.com/recruit#/common_model_category_list_anonymous?model=_HA5_XPZUG0WEGkIFG4vgDcj%252FNQ%253D%253D&filter_dict=_HA5_9jYViLzETF9BFIBjuNM8%252FHJBMPc!WY8peYLb87lNDCU%253D&page_index=_HA5_j947qJSTmyqIKenFuL3bCA%253D%253D&page_size=_HA5_FcIS%252BjcJVg2DzqmBVQt4nw%253D%253D&meta_state=_HA5_gQpJ%252B9podgB89RooGhfDaA%253D%253D&category_field=_HA5_iCw6ZXCFAaCqwttb2FuN7g%253D%253D",
-    "group": "中信"
+    "group": "中信",
+    "todos": []
   },
   {
     "id": "1788835188675",
@@ -697,7 +773,8 @@
     "date": "2026-09-08",
     "note": "",
     "url": "https://job.citic.com/recruit#/common_model_category_list_anonymous?model=_HA5_XPZUG0WEGkIFG4vgDcj%252FNQ%253D%253D&filter_dict=_HA5_9jYViLzETF9BFIBjuNM8%252FHJBMPc!WY8peYLb87lNDCU%253D&page_index=_HA5_j947qJSTmyqIKenFuL3bCA%253D%253D&page_size=_HA5_FcIS%252BjcJVg2DzqmBVQt4nw%253D%253D&meta_state=_HA5_gQpJ%252B9podgB89RooGhfDaA%253D%253D&category_field=_HA5_iCw6ZXCFAaCqwttb2FuN7g%253D%253D",
-    "group": "中信"
+    "group": "中信",
+    "todos": []
   },
   {
     "id": "1788835166631",
@@ -707,7 +784,8 @@
     "date": "2026-09-08",
     "note": "",
     "url": "https://job.citic.com/recruit#/common_model_category_list_anonymous?model=_HA5_XPZUG0WEGkIFG4vgDcj%252FNQ%253D%253D&filter_dict=_HA5_9jYViLzETF9BFIBjuNM8%252FHJBMPc!WY8peYLb87lNDCU%253D&page_index=_HA5_j947qJSTmyqIKenFuL3bCA%253D%253D&page_size=_HA5_FcIS%252BjcJVg2DzqmBVQt4nw%253D%253D&meta_state=_HA5_gQpJ%252B9podgB89RooGhfDaA%253D%253D&category_field=_HA5_iCw6ZXCFAaCqwttb2FuN7g%253D%253D",
-    "group": "中信"
+    "group": "中信",
+    "todos": []
   },
   {
     "id": "1788835138498",
@@ -717,7 +795,8 @@
     "date": "2026-09-08",
     "note": "",
     "url": "https://job.citic.com/recruit#/common_model_category_list_anonymous?model=_HA5_XPZUG0WEGkIFG4vgDcj%252FNQ%253D%253D&filter_dict=_HA5_9jYViLzETF9BFIBjuNM8%252FHJBMPc!WY8peYLb87lNDCU%253D&page_index=_HA5_j947qJSTmyqIKenFuL3bCA%253D%253D&page_size=_HA5_FcIS%252BjcJVg2DzqmBVQt4nw%253D%253D&meta_state=_HA5_gQpJ%252B9podgB89RooGhfDaA%253D%253D&category_field=_HA5_iCw6ZXCFAaCqwttb2FuN7g%253D%253D",
-    "group": "中信"
+    "group": "中信",
+    "todos": []
   },
   {
     "id": "1788749279214",
@@ -727,7 +806,8 @@
     "date": "2026-09-07",
     "note": "",
     "url": "",
-    "group": "首都旅游"
+    "group": "首都旅游",
+    "todos": []
   },
   {
     "id": "1788581740307",
@@ -737,7 +817,8 @@
     "date": "2026-09-05",
     "note": "",
     "url": "https://campus.jd.com/home#/myDeliver?type=present",
-    "group": "京东"
+    "group": "京东",
+    "todos": []
   },
   {
     "id": "1",
@@ -747,6 +828,7 @@
     "date": "2026-09-03",
     "note": "",
     "url": "",
-    "group": "京东方"
+    "group": "京东方",
+    "todos": []
   }
 ]
