@@ -170,9 +170,76 @@
   .token-status { font-size: 13px; min-height: 18px; margin-top: 6px; line-height: 1.5; }
   .token-status.err { color: #d32f2f; }
   .token-status.ok { color: #2e7d32; }
+  /* ====================== 待办提醒（备忘录） ====================== */
+  .todo-panel { background: #fff8f0; border: 1px solid #ffd8a8; border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; }
+  .todo-panel.collapsed .todo-list { display: none; }
+  .todo-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .todo-title { font-size: 14px; font-weight: 600; color: #1d1d1f; }
+  .todo-title .todo-num { color: #e35d00; }
+  .todo-toggle {
+    border: none; background: transparent; color: #86868b; cursor: pointer;
+    font-size: 13px; padding: 4px 8px; border-radius: 8px; font-family: inherit;
+  }
+  .todo-toggle:hover { background: #ffe9d1; color: #1d1d1f; }
+  .todo-list { margin-top: 8px; display: flex; flex-direction: column; gap: 2px; }
+  .todo-item { display: flex; align-items: center; gap: 10px; padding: 7px 8px; border-radius: 8px; cursor: pointer; font-size: 13px; }
+  .todo-item:hover { background: #ffe9d1; }
+  .todo-item .todo-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; background: #c7ccd6; }
+  .todo-item.level-over  .todo-dot { background: #d32f2f; }
+  .todo-item.level-today .todo-dot { background: #ff6b00; }
+  .todo-item.level-soon  .todo-dot { background: #f9a825; }
+  .todo-when { flex: none; min-width: 78px; font-weight: 600; font-variant-numeric: tabular-nums; color: #86868b; }
+  .todo-item.level-over  .todo-when { color: #d32f2f; }
+  .todo-item.level-today .todo-when { color: #e35d00; }
+  .todo-item.level-soon  .todo-when { color: #a67c00; }
+  .todo-company { font-weight: 600; color: #1d1d1f; }
+  .todo-job { color: #86868b; }
+  .todo-item .todo-chip { margin-top: 0; }
+  .todo-time { color: #86868b; margin-left: auto; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .todo-done {
+    flex: none; width: 24px; height: 24px; border-radius: 6px; border: none;
+    background: transparent; color: #86868b; cursor: pointer; font-size: 14px; line-height: 1; font-family: inherit;
+  }
+  .todo-done:hover { background: #2e7d32; color: #fff; }
+  /* 表格「状态」列里的待办小字：按类型配色，逾期一律红 */
+  .todo-chip { display: inline-block; margin-top: 5px; padding: 2px 7px; border-radius: 5px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .todo-chip.type-AI面试 { background: #f3e8fd; color: #7c3aed; }
+  .todo-chip.type-测评 { background: #e8f4fd; color: #0071e3; }
+  .todo-chip.type-笔试 { background: #e3f6f4; color: #0f766e; }
+  .todo-chip.type-面试 { background: #fde8f0; color: #be185d; }
+  .todo-chip.type-其他 { background: #f2f2f7; color: #86868b; }
+  .todo-chip.level-over { background: #fdecea; color: #d32f2f; }
+  /* 弹窗里的待办编辑区 */
+  .todo-editor { display: flex; flex-direction: column; gap: 8px; }
+  .todo-editor-empty { font-size: 13px; color: #86868b; line-height: 1.5; }
+  .todo-editor-row { display: flex; align-items: center; gap: 6px; }
+  .todo-editor-row .form-select { flex: 1.1; min-width: 0; padding: 8px 10px; font-size: 13px; }
+  .todo-editor-row .form-input { flex: 1; min-width: 0; padding: 8px 10px; font-size: 13px; }
+  .todo-editor-row .todo-del {
+    flex: none; width: 30px; height: 30px; border-radius: 8px; border: none;
+    background: transparent; color: #86868b; cursor: pointer; font-size: 18px; line-height: 1; font-family: inherit;
+  }
+  .todo-editor-row .todo-del:hover { background: #fdecea; color: #d32f2f; }
+  /* 滚过面板之后，右下角挂一个小角标，这样翻到下面也不会忘记 */
+  .todo-fab {
+    position: fixed; right: 18px; bottom: 18px; z-index: 50;
+    border: 1px solid #ffd8a8; background: #fff8f0; color: #1d1d1f;
+    border-radius: 999px; padding: 9px 15px; font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: inherit; box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  }
+  .todo-fab:hover { background: #ffe9d1; }
+  /* 点提醒后定位到表格那一行，闪两秒就淡掉 */
+  @keyframes rowFlash { 0%, 70% { background: #fff3d6; } 100% { background: transparent; } }
+  tr.row-flash td { animation: rowFlash 2s ease-out; }
+
   @media (max-width: 640px) {
     .sync-bar { font-size: 12px; padding: 8px 12px; }
     .stats-row { gap: 8px; }
+    .todo-panel { padding: 10px 12px; }
+    .todo-item { gap: 7px; padding: 6px 4px; }
+    .todo-when { min-width: 62px; }
+    .todo-job { display: none; }
+    .todo-editor-row { flex-wrap: wrap; }
     .stat-card { min-width: 70px; padding: 10px 12px; }
     .stat-value { font-size: 22px; }
     th, td { padding: 10px; font-size: 13px; }
@@ -199,6 +266,15 @@
     <span class="sync-dot"></span>
     <span class="sync-text" id="syncText"></span>
     <button class="btn btn-sm" id="retryBtn" style="display:none;"></button>
+  </div>
+
+  <!-- 待办提醒：一打开页面就先看到，不用往下翻找那些早就投过的公司 -->
+  <div class="todo-panel" id="todoPanel" style="display:none;">
+    <div class="todo-head">
+      <span class="todo-title">⏰ 待办提醒（<span class="todo-num" id="todoCount">0</span> 项）</span>
+      <button type="button" class="todo-toggle" id="todoToggle">收起</button>
+    </div>
+    <div class="todo-list" id="todoList"></div>
   </div>
 
   <div class="stats-row">
@@ -347,6 +423,11 @@
           <label class="form-label">备注</label>
           <textarea class="form-textarea" id="noteInput" placeholder="记录笔试/面试进度、HR联系方式、内推码等..."></textarea>
         </div>
+        <div class="form-group">
+          <label class="form-label">待办提醒</label>
+          <div class="todo-editor" id="todoEditor"></div>
+          <button type="button" class="btn btn-sm todo-add-btn" id="todoAddBtn">+ 添加一条</button>
+        </div>
         <div class="modal-footer">
           <button type="button" class="btn" id="cancelBtn">取消</button>
           <button type="submit" class="btn btn-primary">保存</button>
@@ -354,6 +435,9 @@
       </form>
     </div>
   </div>
+
+  <!-- 滚过待办面板之后才出现的角标，点它回到顶部 -->
+  <button type="button" class="todo-fab" id="todoFab" style="display:none;" title="回到顶部的待办提醒"></button>
 
   <div class="modal-overlay" id="tokenOverlay">
     <div class="modal">
@@ -527,7 +611,8 @@
       date: String(r.date || ''),
       note: String(r.note || ''),
       url: normalizeUrl(String(r.url || '')),
-      group: String(r.group || '').trim()
+      group: String(r.group || '').trim(),
+      todos: normalizeTodos(r.todos)
     };
   }
 
@@ -965,6 +1050,229 @@
     return out;
   }
 
+  /* ========================= 待办提醒（备忘录） ========================= */
+
+  // 类型是固定几种，既能配色也方便以后按类型筛选。存的字符串同时用作 CSS 类名后缀。
+  const TODO_TYPES = ['AI面试', '测评', '笔试', '面试', '其他'];
+  const TODO_COLLAPSE_KEY = 'qiuzhao_todo_collapsed';
+
+  // 取本地日期。注意不能用 toISOString()——那是 UTC 时间，在国内（UTC+8）
+  // 凌晨 0 点到 8 点之间会算成前一天，对"截止日期"这种字段是致命的。
+  function localDateStr(d) {
+    d = d || new Date();
+    const m = d.getMonth() + 1, day = d.getDate();
+    return d.getFullYear() + '-' + (m < 10 ? '0' + m : m) + '-' + (day < 10 ? '0' + day : day);
+  }
+  // 'YYYY-MM-DD' 解析成本地当天 00:00 的 Date（new Date('2026-09-23') 会按 UTC 解析，少算 8 小时）
+  function parseLocalDate(s) {
+    const p = String(s).split('-');
+    return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+  }
+  function isDateStr(s) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return false;
+    const d = parseLocalDate(s);
+    // 2026-13-99、2 月 30 日 这种 JS 会自动顺延成合法日期，必须回写比对才算数
+    return !isNaN(d.getTime()) && localDateStr(d) === s;
+  }
+  function isTimeStr(s) { return /^\d{2}:\d{2}$/.test(s) && Number(s.slice(0, 2)) < 24 && Number(s.slice(3)) < 60; }
+
+  // 把云端读到的 todos 洗成可信结构：类型必须在白名单里，日期时间必须合法
+  function normalizeTodos(raw) {
+    if (!Array.isArray(raw)) return [];
+    const seen = {};
+    const out = [];
+    raw.forEach(function(t, i) {
+      if (!t || typeof t !== 'object') return;
+      let id = (typeof t.id === 'string' && t.id) ? t.id : 'td_' + Date.now() + '_' + i;
+      if (seen[id]) id = id + '_' + i;      // id 撞了的话，"完成"会一次清掉两条
+      seen[id] = true;
+      out.push({
+        id: id,
+        type: TODO_TYPES.indexOf(t.type) !== -1 ? t.type : '其他',
+        due: isDateStr(String(t.due || '')) ? String(t.due) : '',
+        dueTime: isTimeStr(String(t.dueTime || '')) ? String(t.dueTime) : ''
+      });
+    });
+    return out;
+  }
+
+  // 算紧急程度：level 决定颜色，text 是显示文案，key 用来排序（越小越急）
+  function todoUrgency(t) {
+    if (!t.due) return { level: 'none', text: '待办', key: Number.MAX_SAFE_INTEGER };
+
+    const todayStart = parseLocalDate(localDateStr()).getTime();
+    const dueDay = parseLocalDate(t.due).getTime();
+    const dayDiff = Math.round((dueDay - todayStart) / 86400000);
+
+    // 只填了日期就按当天 23:59:59 算，填了时刻就按那个时刻算
+    let dueMs = dueDay + 86399999;
+    if (t.dueTime) {
+      const hm = t.dueTime.split(':');
+      dueMs = dueDay + (Number(hm[0]) * 60 + Number(hm[1])) * 60000;
+    }
+
+    if (dueMs < Date.now()) {
+      const overDays = Math.round((todayStart - dueDay) / 86400000);
+      return { level: 'over', text: overDays <= 0 ? '今天已过' : '逾期 ' + overDays + ' 天', key: dueMs };
+    }
+    if (dayDiff <= 0) return { level: 'today', text: t.dueTime ? '今天 ' + t.dueTime : '今天', key: dueMs };
+    if (dayDiff === 1) return { level: 'soon', text: '明天', key: dueMs };
+    if (dayDiff <= 3) return { level: 'soon', text: dayDiff + ' 天后', key: dueMs };
+    return { level: 'later', text: dayDiff + ' 天后', key: dueMs };
+  }
+
+  // 把所有记录上的待办摊平成一张列表——面板的每一行是一条待办，不是一条记录
+  function collectTodos() {
+    const out = [];
+    jobs.forEach(function(j) {
+      (j.todos || []).forEach(function(t) {
+        out.push({ job: j, todo: t, u: todoUrgency(t) });
+      });
+    });
+    out.sort(function(a, b) {
+      if (a.u.key !== b.u.key) return a.u.key - b.u.key;
+      const ia = sortStatusOrder.indexOf(a.job.status), ib = sortStatusOrder.indexOf(b.job.status);
+      if (ia !== ib) return ia - ib;
+      return String(a.job.company || '').localeCompare(String(b.job.company || ''), 'zh-CN');
+    });
+    return out;
+  }
+
+  // 表格「状态」列里那行小字。一条记录挂多件事时只报最近的，不把单元格撑开
+  function todoSummaryHtml(job) {
+    const list = (job.todos || []).map(function(t) { return { todo: t, u: todoUrgency(t) }; })
+      .sort(function(a, b) { return a.u.key - b.u.key; });
+    if (!list.length) return '';
+    const first = list[0];
+    // 排序后最急的那条如果压根没填日期，就别写「最近 待办」这种绕口的话
+    const label = list.length === 1
+      ? first.todo.type + ' · ' + first.u.text
+      : list.length + ' 项待办' + (first.u.level === 'none' ? '' : ' · 最近 ' + first.u.text);
+    // 逾期一律盖成红色，免得一个紫色的「AI面试」把"已经来不及了"这件事糊过去
+    const overCls = first.u.level === 'over' ? ' level-over' : '';
+    return '<div class="todo-chip type-' + first.todo.type + overCls + '">' + escapeHtml(label) + '</div>';
+  }
+
+  function formatDueLabel(due, dueTime) {
+    const p = due.split('-');
+    const label = Number(p[1]) + '月' + Number(p[2]) + '日';
+    return dueTime ? label + ' ' + dueTime : label;
+  }
+
+  let todoPanelOutOfView = false;      // 由 IntersectionObserver 维护，测试环境里恒为 false
+
+  function updateTodoFab() {
+    const fab = document.getElementById('todoFab');
+    const panel = document.getElementById('todoPanel');
+    const n = collectTodos().length;
+    if (!n) { fab.style.display = 'none'; return; }
+    const collapsed = panel.classList.contains('collapsed');
+    fab.style.display = (collapsed || todoPanelOutOfView) ? '' : 'none';
+    fab.textContent = '⏰ ' + n + ' 项待办';
+  }
+
+  function renderTodoPanel() {
+    const panel = document.getElementById('todoPanel');
+    const listEl = document.getElementById('todoList');
+    const items = collectTodos();
+    document.getElementById('todoCount').textContent = items.length;
+
+    if (items.length === 0) {
+      panel.style.display = 'none';     // 没有待办时整块不占地方
+      listEl.innerHTML = '';
+      updateTodoFab();
+      return;
+    }
+    panel.style.display = '';
+
+    listEl.innerHTML = items.map(function(it) {
+      const t = it.todo, u = it.u;
+      const when = t.due ? formatDueLabel(t.due, t.dueTime) : '';
+      return '<div class="todo-item level-' + u.level + '"' +
+          ' data-job="' + escapeAttr(it.job.id) + '" data-todo="' + escapeAttr(t.id) + '"' +
+          ' title="点击定位到表格里的这条记录">' +
+        '<span class="todo-dot"></span>' +
+        '<span class="todo-when">' + escapeHtml(u.text) + '</span>' +
+        '<span class="todo-company">' + escapeHtml(it.job.company || '') + '</span>' +
+        '<span class="todo-job">' + escapeHtml(it.job.job || '') + '</span>' +
+        '<span class="todo-chip type-' + t.type + '">' + escapeHtml(t.type) + '</span>' +
+        '<span class="todo-time">' + escapeHtml(when) + '</span>' +
+        '<button type="button" class="todo-done" data-done="1" title="标记完成，清除这条提醒">✓</button>' +
+        '</div>';
+    }).join('');
+
+    updateTodoFab();
+  }
+
+  function setTodoCollapsed(v) {
+    document.getElementById('todoPanel').classList.toggle('collapsed', v);
+    document.getElementById('todoToggle').textContent = v ? '展开' : '收起';
+    try { localStorage.setItem(TODO_COLLAPSE_KEY, v ? '1' : '0'); } catch (err) { /* 存不下就算了，只是记不住偏好 */ }
+    updateTodoFab();
+  }
+  function getTodoCollapsed() {
+    try { return localStorage.getItem(TODO_COLLAPSE_KEY) === '1'; } catch (err) { return false; }
+  }
+
+  // 点提醒 → 定位到表格里那一行并闪一下，而不是直接弹编辑框（避免手滑改了数据）
+  function jumpToJob(jobId) {
+    let el = document.querySelector('tr[data-id="' + jobId + '"]');
+    if (!el) {
+      // 可能被搜索词／状态筛选挡着，或者所在的集团被折叠了——先恢复显示再定位
+      document.getElementById('searchInput').value = '';
+      document.getElementById('statusFilter').value = '';
+      collapsedGroups.clear();
+      render();
+      el = document.querySelector('tr[data-id="' + jobId + '"]');
+    }
+    if (!el) return;
+    if (el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.add('row-flash');
+    setTimeout(function() { el.classList.remove('row-flash'); }, 2000);
+  }
+
+  function completeTodo(jobId, todoId) {
+    const job = jobs.find(function(j) { return j.id === jobId; });
+    if (!job || !job.todos) return;
+    const t = job.todos.find(function(x) { return x.id === todoId; });
+    if (!t) return;
+    if (!confirm('把「' + (job.company || '') + ' · ' + t.type + '」这条提醒标记为完成并清除？')) return;
+    job.todos = job.todos.filter(function(x) { return x.id !== todoId; });
+    render();
+    save();
+  }
+
+  /* ---------- 弹窗里的待办编辑区 ---------- */
+
+  let editingTodos = [];    // 弹窗打开期间的暂存，点保存才写回记录
+
+  function renderTodoEditor() {
+    const box = document.getElementById('todoEditor');
+    if (editingTodos.length === 0) {
+      box.innerHTML = '<div class="todo-editor-empty">还没有待办。收到 AI 面试／测评／笔试通知就加一条，填上截止时间。</div>';
+      return;
+    }
+    box.innerHTML = editingTodos.map(function(t, i) {
+      const opts = ['<option value="">请选择</option>'].concat(TODO_TYPES.map(function(ty) {
+        return '<option value="' + ty + '"' + (t.type === ty ? ' selected' : '') + '>' + ty + '</option>';
+      })).join('');
+      return '<div class="todo-editor-row">' +
+        '<select class="form-select" data-idx="' + i + '" data-field="type">' + opts + '</select>' +
+        '<input type="date" class="form-input" data-idx="' + i + '" data-field="due" value="' + escapeAttr(t.due || '') + '">' +
+        '<input type="time" class="form-input" data-idx="' + i + '" data-field="dueTime" value="' + escapeAttr(t.dueTime || '') + '" title="选填。不填就按当天结束算">' +
+        '<button type="button" class="todo-del" data-idx="' + i + '" title="删掉这条">×</button>' +
+        '</div>';
+    }).join('');
+  }
+
+  // 编辑区里的取值靠事件委托，因为行是拼字符串渲染出来的
+  function todoEditorChange(e) {
+    const i = Number(e.target.dataset.idx);
+    const f = e.target.dataset.field;
+    if (!f || isNaN(i) || !editingTodos[i]) return;
+    editingTodos[i][f] = e.target.value;
+  }
+
   function render() {
     const search = document.getElementById('searchInput').value.toLowerCase();
     const filter = document.getElementById('statusFilter').value;
@@ -1037,7 +1345,7 @@
       return '<tr data-id="' + job.id + '"' + (entry.indent ? ' class="child-row"' : '') + '>' +
         '<td><div class="company-name">' + companyCell + '</div>' + groupTag + '</td>' +
         '<td><div class="job-title">' + escapeHtml(job.job) + '</div></td>' +
-        '<td><span class="status-badge status-' + job.status + '">' + statusLabels[job.status] + '</span></td>' +
+        '<td><span class="status-badge status-' + job.status + '">' + statusLabels[job.status] + '</span>' + todoSummaryHtml(job) + '</td>' +
         '<td>' + (skipProgress
           ? '<span class="progress-skip">—</span>'
           : '<div class="progress-bar"><div class="progress-fill progress-' + job.status + '"></div></div><div class="stage-dots">' + dots + '</div>') + '</td>' +
@@ -1048,6 +1356,8 @@
           '<button class="icon-btn delete-btn" title="删除"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8.10001 3C8.10001 2.50294 8.50295 2.1 9.00001 2.1H15C15.4971 2.1 15.9 2.50294 15.9 3C15.9 3.49706 15.4971 3.9 15 3.9H9.00001C8.50295 3.9 8.10001 3.49706 8.10001 3Z" fill="currentColor"/><path d="M10 15.9C9.50295 15.9 9.10001 15.4971 9.10001 15L9.10001 10C9.10001 9.50294 9.50295 9.1 10 9.1C10.4971 9.1 10.9 9.50294 10.9 10L10.9 15C10.9 15.4971 10.4971 15.9 10 15.9Z" fill="currentColor"/><path d="M13.1 15C13.1 15.4971 13.5029 15.9 14 15.9C14.4971 15.9 14.9 15.4971 14.9 15L14.9 10C14.9 9.50294 14.4971 9.1 14 9.1C13.5029 9.1 13.1 9.50294 13.1 10V15Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M2.10001 6C2.10001 5.50294 2.50295 5.1 3.00001 5.1H4.99152C4.99785 5.09993 5.00417 5.09993 5.01048 5.1H18.9895C18.9958 5.09993 19.0021 5.09993 19.0085 5.1H21C21.4971 5.1 21.9 5.50294 21.9 6C21.9 6.49706 21.4971 6.9 21 6.9H19.8281L18.8448 18.6993C18.7412 19.9432 17.7013 20.9 16.4531 20.9H7.54686C6.29865 20.9 5.25881 19.9432 5.15515 18.6993L4.17188 6.9H3.00001C2.50295 6.9 2.10001 6.49706 2.10001 6ZM5.97811 6.9L18.0219 6.9L17.0511 18.5498C17.0251 18.8608 16.7652 19.1 16.4531 19.1H7.54686C7.23481 19.1 6.97485 18.8608 6.94893 18.5498L5.97811 6.9Z" fill="currentColor"/></svg></button>' +
         '</div></td></tr>';
     }).join('');
+
+    renderTodoPanel();
   }
 
   function openModal(isEdit) {
@@ -1056,8 +1366,10 @@
     if (!isEdit) {
       document.getElementById('jobForm').reset();
       document.getElementById('editId').value = '';
-      document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
+      document.getElementById('dateInput').value = localDateStr();   // 用本地日期，toISOString 在国内凌晨会差一天
+      editingTodos = [];
     }
+    renderTodoEditor();
   }
 
   function closeModal() {
@@ -1079,14 +1391,18 @@
     var note = document.getElementById('noteInput').value.trim();
     var url = normalizeUrl(document.getElementById('urlInput').value);
     var group = document.getElementById('groupInput').value.trim();
+    // 类型没选的行直接丢掉——那就是加了行但没填
+    var todos = editingTodos.filter(function(t) { return t.type; }).map(function(t) {
+      return { id: t.id, type: t.type, due: t.due, dueTime: t.dueTime };
+    });
 
     if (editingId) {
       var idx = jobs.findIndex(function(j) { return j.id === editingId; });
       if (idx !== -1) {
-        jobs[idx] = { id: jobs[idx].id, company: company, job: job, status: status, date: date, note: note, url: url, group: group };
+        jobs[idx] = { id: jobs[idx].id, company: company, job: job, status: status, date: date, note: note, url: url, group: group, todos: todos };
       }
     } else {
-      jobs.unshift({ id: Date.now().toString(), company: company, job: job, status: status, date: date, note: note, url: url, group: group });
+      jobs.unshift({ id: Date.now().toString(), company: company, job: job, status: status, date: date, note: note, url: url, group: group, todos: todos });
     }
     render();
     closeModal();
@@ -1118,6 +1434,8 @@
       document.getElementById('noteInput').value = job.note || '';
       document.getElementById('urlInput').value = job.url || '';
       document.getElementById('groupInput').value = job.group || '';
+      // 复制一份，免得在弹窗里改到一半就动了真实数据
+      editingTodos = (job.todos || []).map(function(t) { return { id: t.id, type: t.type, due: t.due, dueTime: t.dueTime }; });
       openModal(true);
     } else if (btn.classList.contains('delete-btn')) {
       if (confirm('确定删除这条记录吗？')) {
@@ -1183,7 +1501,8 @@
             date: String(j.date || ''),
             note: String(j.note || ''),
             url: normalizeUrl(String(j.url || '')),
-            group: String(j.group || '').trim()
+            group: String(j.group || '').trim(),
+            todos: normalizeTodos(j.todos)
           };
         });
       if (cleaned.length === 0) {
@@ -1239,6 +1558,45 @@
     document.getElementById('tokenInput').value = '';
     setTokenStatus('已清除。这个浏览器不再能保存到云端，改动会只留在页面上。', 'err');
   });
+
+  /* ------------------------------ 待办提醒的交互 ------------------------------ */
+
+  document.getElementById('todoToggle').addEventListener('click', function() {
+    setTodoCollapsed(!document.getElementById('todoPanel').classList.contains('collapsed'));
+  });
+
+  document.getElementById('todoFab').addEventListener('click', function() {
+    if (typeof window.scrollTo === 'function') window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  document.getElementById('todoList').addEventListener('click', function(e) {
+    const item = e.target.closest ? e.target.closest('.todo-item') : null;
+    if (!item) return;
+    if (e.target.closest('.todo-done')) { completeTodo(item.dataset.job, item.dataset.todo); return; }
+    jumpToJob(item.dataset.job);
+  });
+
+  document.getElementById('todoAddBtn').addEventListener('click', function() {
+    editingTodos.push({ id: 'td_new_' + Date.now() + '_' + editingTodos.length, type: '', due: '', dueTime: '' });
+    renderTodoEditor();
+  });
+  document.getElementById('todoEditor').addEventListener('change', todoEditorChange);
+  document.getElementById('todoEditor').addEventListener('input', todoEditorChange);   // 有的浏览器改日期只触发 input
+  document.getElementById('todoEditor').addEventListener('click', function(e) {
+    const btn = e.target.closest ? e.target.closest('.todo-del') : null;
+    if (!btn) return;
+    editingTodos.splice(Number(btn.dataset.idx), 1);
+    renderTodoEditor();
+  });
+
+  // 滚过待办面板之后右下角挂个角标。浏览器不支持就直接不挂，不影响别的功能
+  setTodoCollapsed(getTodoCollapsed());
+  if (typeof IntersectionObserver === 'function') {
+    new IntersectionObserver(function(entries) {
+      todoPanelOutOfView = !entries[0].isIntersecting;
+      updateTodoFab();
+    }, { threshold: 0 }).observe(document.getElementById('todoPanel'));
+  }
 
   // 还有改动没上传成功就想关页面／刷新时拦一下，避免数据悄悄丢掉
   window.addEventListener('beforeunload', function(e) {
