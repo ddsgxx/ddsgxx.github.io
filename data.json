@@ -177,14 +177,21 @@
   },
   {
     "id": "1790128892731",
-    "company": "同方智慧能源有限责任公司",
+    "company": "同方节能工程技术有限责任公司",
     "job": "经营管理岗(J30840)",
     "status": "投递",
     "date": "2026-09-24",
     "note": "",
     "url": "https://cnnc.zhiye.com/personal/deliveryRecord",
     "group": "中核",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1790218524438_0",
+        "type": "测评",
+        "due": "2026-10-14",
+        "dueTime": "10:49"
+      }
+    ]
   },
   {
     "id": "1790067168610",
