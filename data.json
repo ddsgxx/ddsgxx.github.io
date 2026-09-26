@@ -118,7 +118,14 @@
     "note": "",
     "url": "https://mengniu.zhiye.com/personal/deliveryRecord",
     "group": "蒙牛",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1790386970431_0",
+        "type": "测评",
+        "due": "2026-09-25",
+        "dueTime": "12:09"
+      }
+    ]
   },
   {
     "id": "1790129115746",
