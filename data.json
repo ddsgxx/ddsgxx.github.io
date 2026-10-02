@@ -92,7 +92,14 @@
     "note": "",
     "url": "https://careers.citics.com/my",
     "group": "中信",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1790930481587_0",
+        "type": "测评",
+        "due": "2026-10-05",
+        "dueTime": "23:59"
+      }
+    ]
   },
   {
     "id": "1790474441247",
