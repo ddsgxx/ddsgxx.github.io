@@ -884,7 +884,14 @@
     "note": "",
     "url": "https://career.cmbchina.com/center/history",
     "group": "招商银行",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1791598292221_0",
+        "type": "AI面试",
+        "due": "2026-10-12",
+        "dueTime": "09:00"
+      }
+    ]
   },
   {
     "id": "1790129026011",
