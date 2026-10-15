@@ -30,7 +30,14 @@
     "note": "",
     "url": "https://app.mokahr.com/campus-recruitment/kpmg/76195#/candidateHome/applications",
     "group": "四大",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1792064744808_0",
+        "type": "测评",
+        "due": "2026-10-18",
+        "dueTime": "19:45"
+      }
+    ]
   },
   {
     "id": "1792061037305",
