@@ -770,7 +770,14 @@
     "note": "",
     "url": "https://job1.ccb.com/cn/job/mycenter/apply.html?planType=XY&orgId=1007477",
     "group": "建行",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1792484773477_0",
+        "type": "笔试",
+        "due": "2026-10-31",
+        "dueTime": "14:30"
+      }
+    ]
   },
   {
     "id": "1791433649155",
