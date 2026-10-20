@@ -1148,7 +1148,14 @@
     "note": "",
     "url": "https://job.icbc.com.cn/pc/index.html#/main/personal/delivery",
     "group": "工商银行",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1792477286640_0",
+        "type": "笔试",
+        "due": "2026-10-31",
+        "dueTime": "09:30"
+      }
+    ]
   },
   {
     "id": "1790129034003",
