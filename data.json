@@ -74,14 +74,7 @@
     "note": "刷新看报名人数",
     "url": "http://bm.scs.gov.cn/pp/gkweb/core/web/ui/business/person/person_home.html",
     "group": "",
-    "todos": [
-      {
-        "id": "td_new_1792138188629_0",
-        "type": "其他",
-        "due": "2026-10-19",
-        "dueTime": "21:15"
-      }
-    ]
+    "todos": []
   },
   {
     "id": "1792133261790",
