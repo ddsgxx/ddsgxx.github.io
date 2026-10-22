@@ -239,7 +239,14 @@
     "note": "",
     "url": "https://polycareer.zhiye.com/personal/deliveryRecord",
     "group": "保利集团",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1792640365744_0",
+        "type": "测评",
+        "due": "2026-10-24",
+        "dueTime": "10:07"
+      }
+    ]
   },
   {
     "id": "1791866461639",
