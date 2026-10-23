@@ -151,7 +151,14 @@
     "note": "",
     "url": "https://app.mokahr.com/campus-recruitment/pwc/148260?locale=zh-CN#/candidateHome/applications",
     "group": "四大",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1792728011036_0",
+        "type": "测评",
+        "due": "2026-10-25",
+        "dueTime": "10:00"
+      }
+    ]
   },
   {
     "id": "1792063755966",
