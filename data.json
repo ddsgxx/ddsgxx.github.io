@@ -1821,7 +1821,14 @@
     "note": "",
     "url": "https://chinalife.zhiye.com/personal/deliveryRecord",
     "group": "中国人寿",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1792753959825_0",
+        "type": "测评",
+        "due": "2026-10-24",
+        "dueTime": "20:00"
+      }
+    ]
   },
   {
     "id": "1788932928974",
