@@ -1561,7 +1561,14 @@
     "note": "",
     "url": "https://baicgroup.zhiye.com/personal/deliveryRecord",
     "group": "北汽",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1792807364589_0",
+        "type": "面试",
+        "due": "2026-10-26",
+        "dueTime": "13:30"
+      }
+    ]
   },
   {
     "id": "1789565786913",
