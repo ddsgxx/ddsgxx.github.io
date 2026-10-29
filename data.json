@@ -997,7 +997,14 @@
     "note": "硕士在读证明",
     "url": "https://rencaishichang.chd.com.cn/w3/#/w3/mydesk/main_view",
     "group": "华电集团",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1793272470219_0",
+        "type": "笔试",
+        "due": "2026-10-31",
+        "dueTime": "14:31"
+      }
+    ]
   },
   {
     "id": "1790406822240",
