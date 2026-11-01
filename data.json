@@ -1419,7 +1419,14 @@
     "note": "",
     "url": "https://q.yingjiesheng.com/pc/personal?tab=2",
     "group": "中国移动",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1793502103178_0",
+        "type": "AI面试",
+        "due": "2026-11-02",
+        "dueTime": "23:59"
+      }
+    ]
   },
   {
     "id": "1789614505569",
