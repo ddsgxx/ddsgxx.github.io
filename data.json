@@ -635,14 +635,7 @@
     "note": "",
     "url": "https://job.bankcomm.com/index.do#/personal/record",
     "group": "交通银行",
-    "todos": [
-      {
-        "id": "td_new_1792999365404_0",
-        "type": "AI面试",
-        "due": "2026-11-02",
-        "dueTime": "12:00"
-      }
-    ]
+    "todos": []
   },
   {
     "id": "1791458718173",
