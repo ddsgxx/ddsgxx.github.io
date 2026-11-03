@@ -1764,14 +1764,7 @@
     "note": "",
     "url": "https://xiaoyuan.zhaopin.com/scrd/delivery/record",
     "group": "中国邮政",
-    "todos": [
-      {
-        "id": "td_new_1793170321418_0",
-        "type": "笔试",
-        "due": "2026-11-03",
-        "dueTime": "19:00"
-      }
-    ]
+    "todos": []
   },
   {
     "id": "1788940914789",
