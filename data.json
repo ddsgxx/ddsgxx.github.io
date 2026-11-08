@@ -620,14 +620,7 @@
     "note": "",
     "url": "https://xiaoyuan.zhaopin.com/scrd/delivery/record",
     "group": "中国海油",
-    "todos": [
-      {
-        "id": "td_new_1793931580698_0",
-        "type": "笔试",
-        "due": "2026-11-07",
-        "dueTime": "14:00"
-      }
-    ]
+    "todos": []
   },
   {
     "id": "1791525228473",
