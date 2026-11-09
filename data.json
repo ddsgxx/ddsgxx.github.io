@@ -547,14 +547,7 @@
     "note": "",
     "url": "https://job.sinopec.com/#/school/info/applicationProgress",
     "group": "中国石化",
-    "todos": [
-      {
-        "id": "td_new_1793931687162_0",
-        "type": "笔试",
-        "due": "2026-11-08",
-        "dueTime": "15:00"
-      }
-    ]
+    "todos": []
   },
   {
     "id": "1791525663921",
