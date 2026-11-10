@@ -957,7 +957,14 @@
     "note": "",
     "url": "https://careers.citics.com/my",
     "group": "中信",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1794311952878_0",
+        "type": "面试",
+        "due": "2026-11-12",
+        "dueTime": "14:00"
+      }
+    ]
   },
   {
     "id": "1790474441247",
