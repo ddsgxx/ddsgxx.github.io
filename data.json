@@ -657,7 +657,14 @@
     "note": "",
     "url": "https://campus.chinahr.com/pages/2027-boc/#/",
     "group": "中国银行",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1794311914261_0",
+        "type": "面试",
+        "due": "2026-11-24",
+        "dueTime": "13:15"
+      }
+    ]
   },
   {
     "id": "1791458704547",
