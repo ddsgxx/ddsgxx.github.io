@@ -1327,7 +1327,14 @@
     "note": "",
     "url": "https://jqzp.fesco.com.cn/personalcenter",
     "group": "三元",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1794410399972_0",
+        "type": "AI面试",
+        "due": "2026-11-13",
+        "dueTime": "12:00"
+      }
+    ]
   },
   {
     "id": "1790056517077",
