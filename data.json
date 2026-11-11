@@ -1074,7 +1074,14 @@
     "note": "",
     "url": "https://wecruit.hotjob.cn/SU64b60d25bef57c7e363ff1a3/mc/my/myDeliver",
     "group": "中工国际(国机集团)",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1794410540321_0",
+        "type": "AI面试",
+        "due": "2026-11-13",
+        "dueTime": "12:00"
+      }
+    ]
   },
   {
     "id": "1790235730477",
