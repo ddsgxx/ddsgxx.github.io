@@ -1624,7 +1624,14 @@
     "note": "",
     "url": "https://careers.ey.com.cn/campus-recruitment/ey/166374?locale=zh-CN/#/candidateHome/applications",
     "group": "四大",
-    "todos": []
+    "todos": [
+      {
+        "id": "td_new_1794410333358_0",
+        "type": "测评",
+        "due": "2026-11-13",
+        "dueTime": "00:10"
+      }
+    ]
   },
   {
     "id": "1789528409899",
